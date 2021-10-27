@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3: SVG bar chart with value labels (centered)</title>
+		<script type="text/javascript" src="../d3.js"></script>
+		<style type="text/css">
+			/* No style rules here yet */
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+            //ASSIGNMENT: familiarizing youself with drawing in svg
+            //1. change the bar chart orientation so that it is horizontal(bars go across) instead of vertical,
+						//changing the placement of text as well to keep the number labels at the end of each bar
+
+            //2. change the bar chart colors so that instead of shades of blue, the colors are shades of red or green.
+						//(r,g,b)
+
+			//Width and height
+
+			var dataset = [ 50,22, 100, 130,300,20];
+			var w = window.innerWidth;
+			var h = window.innerHeight;
+
+
+			var xScale = d3.scaleLinear().domain(0,6).range([0,w])
+			var yScale = d3.scaleLinear().domain(0,300).range([0,h])
+			var cScale = d3.scaleLinear().domain(0,6).range(["red","green"])
+
+			var barwidth = w/dataset.length-2
+
+
+		//	var yScale = d3.
+			//var cScale
+
+
+			//Create SVG element
+			var svg = d3.select("body")
+						.append("svg")
+						.attr("width", w)
+						.attr("height", h);
+
+			svg.selectAll("rect")
+			   .data(dataset)
+			   .enter()
+			   .append("rect")
+                //HINT: start by switching the x and y values with each other, and the width and height values with eachother.
+                        //then adjust the y values such that they align on the bottom.
+			   .attr("y", function(d) {
+			   		return h-yscale(d)
+			   })
+			   .attr("x", function(d, i) {
+					 return xScale(i)
+			   		//return i*20
+			   })
+			   .attr("width", 10)
+			   .attr("height", function(d) {
+			   		return yScale(d)
+			   })
+			   .attr("fill", function(d) {
+					return cScale;
+			   })
+         .attr("opacity",.8);
+
+
+
+
+		</script>
+	</body>
+</html>
